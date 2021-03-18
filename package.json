@@ -1,0 +1,23 @@
+{
+  "name": "bem-react-constructor",
+  "version": "1.0.0",
+  "description": "Constructor for BEM in terms of Reactjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/urlimited/bem-react-constructor.git"
+  },
+  "keywords": [
+    "bem",
+    "react"
+  ],
+  "author": "urlimited",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/urlimited/bem-react-constructor/issues"
+  },
+  "homepage": "https://github.com/urlimited/bem-react-constructor#readme"
+}
