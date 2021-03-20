@@ -36,7 +36,11 @@ export class TemplateBuilder {
         const props = {
             classes: [],
             id: [],
-            children: []
+            children: [],
+            ...Object.keys(elementToBuild)
+                .filter(k => ![
+                    'type'
+                ].includes(k))
         };
 
         if (elementToBuild.classes !== undefined){
@@ -49,7 +53,7 @@ export class TemplateBuilder {
         if (elementToBuild.children !== undefined && Array.isArray(elementToBuild.children)) {
             elementToBuild.children.forEach(ctb => {
                 props.children.push(this._buildElement(ctb))
-            })
+            });
 
             return <RenderedElement {...props} />;
         }
