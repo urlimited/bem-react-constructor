@@ -68,3 +68,5 @@ export class TemplateBuilder {
         return data;
     }
 }
+
+export default TemplateBuilder;
