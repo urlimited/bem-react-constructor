@@ -7,8 +7,8 @@ const output = execSync('npm run extract --path=./test/extractScript/cases/direc
 describe('Extract script', () => {
     it('returns required file structure', () => {
         assert.strictEqual(
-            JSON.parse(fs.readFileSync('./test/extractScript/cases/elementsDeclaration.json', 'utf8')).toString(),
-            JSON.parse(fs.readFileSync('./test/extractScript/cases/elementsDeclarationCorrect.json', 'utf8')).toString()
+            JSON.parse(fs.readFileSync('./test/extractScript/cases/directoryStructure/elementsDeclaration.json', 'utf8')).toString(),
+            JSON.parse(fs.readFileSync('./test/extractScript/cases/directoryStructure/elementsDeclarationCorrect.json', 'utf8')).toString()
         );
     });
 });

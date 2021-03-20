@@ -8,7 +8,7 @@ const fs = require('fs');
 const execSync = require('child_process').execSync;
 const output = execSync('npm run extract --path=./test/templateBuilder/cases/directoryStructure', {encoding: 'utf-8'});
 
-const elementsDeclaration = JSON.parse(fs.readFileSync('./test/templateBuilder/cases/elementsDeclaration.json', {encoding: 'utf-8'}));
+const elementsDeclaration = JSON.parse(fs.readFileSync('./test/templateBuilder/cases/directoryStructure/elementsDeclaration.json', {encoding: 'utf-8'}));
 
 const toCheck = [
     require('./cases/elementWithChildren.ucase'),

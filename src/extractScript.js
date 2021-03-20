@@ -36,8 +36,8 @@ const _isDirHasBlockFile = (dirPath, dirName, ext) => {
 }
 
 try {
-    fs.writeFileSync(process.env.npm_config_path + '/../elementsDeclaration.json', JSON.stringify(buildFileStructure(process.env.npm_config_path)));
-    console.log('\x1b[32m%s\x1b[0m', "Created file in " + fs.realpathSync(process.env.npm_config_path + '/../elementsDeclaration.json'));
+    fs.writeFileSync(process.env.npm_config_path + '/elementsDeclaration.json', JSON.stringify(buildFileStructure(process.env.npm_config_path)));
+    console.log('\x1b[32m%s\x1b[0m', "Created file in " + fs.realpathSync(process.env.npm_config_path + '/elementsDeclaration.json'));
 } catch (e) {
     console.log('\x1b[31m%s\x1b[0m', e.message);
 }
