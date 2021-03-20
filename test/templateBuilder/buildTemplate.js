@@ -1,5 +1,6 @@
 import {TemplateBuilder} from "../../src/templateBuilder";
 import React from "react";
+import ReactDOMServer from "react-dom/server";
 
 const assert = require('assert');
 const fs = require('fs');
@@ -9,42 +10,22 @@ const output = execSync('npm run extract --path=./test/templateBuilder/cases/dir
 
 const elementsDeclaration = JSON.parse(fs.readFileSync('./test/templateBuilder/cases/elementsDeclaration.json', {encoding: 'utf-8'}));
 
-const htmlRendered = TemplateBuilder.getInstance([
-    {
-        type: 'section',
-        classes: ['awdwad', 'qwerty'],
-        children: [
-            {
-                type: 'link',
-                children: [
-                    {
-                        type: 'link'
-                    }
-                ]
-            },
-            {
-                type: 'section'
-            }
-        ]
-    },
-    {
-        type: 'link',
-        classes: ['awdwad', 'qwerty'],
-        children: [
-            {
-                type: 'link'
-            },
-            {
-                type: 'section'
-            }
-        ]
-    }
-], elementsDeclaration).build();
+const toCheck = [
+    require('./cases/elementWithChildren.ucase'),
+    require('./cases/singleElement.ucase')
+    //TemplateBuilder.getInstance(require('./cases/elementWithChildren.js').useCase, elementsDeclaration).build()),
+    //TemplateBuilder.getInstance(require('./cases/singleElement.js').useCase, elementsDeclaration).build())
+]
+
+//console.log(ReactDOMServer.renderToString(htmlRendered))
 
 describe('Template builder', () => {
-    it('returns required html, based on client code', () => {
-        return assert.strictEqual(
-            1, 1
-        );
+    toCheck.forEach(tc => {
+        it(tc.description, () => {
+            return assert.strictEqual(
+                ReactDOMServer.renderToString(TemplateBuilder.getInstance(elementsDeclaration).build(tc.useCase)),
+                tc.check
+            );
+        });
     });
 });

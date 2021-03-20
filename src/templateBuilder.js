@@ -3,7 +3,6 @@ import React from "react";
 export class TemplateBuilder {
     static _instance = null;
 
-    //TODO: рекурсивный метод, чтобы каждый блок сам себя мог рендерить. Передавать туда все, что попадает под content свойство конфигураций
     //TODO: проверку, что конфигурации сформированы корректно
     //TODO: подобие мемоизации, чтобы 2 раза не пробегаться по одному и тому же конфигу с рекурсией, ?? можно даже сохранять в локальный storage клиент ??
 
@@ -11,21 +10,21 @@ export class TemplateBuilder {
 
     _elementsDeclaration = {}
 
-    constructor(elementsToBuild, elementsDeclarationPath) {
-        this.elementsToBuild = elementsToBuild;
-
+    constructor(elementsDeclarationPath) {
         this._elementsDeclaration = elementsDeclarationPath;
     }
 
-    static getInstance(elementsToBuild, elementsDeclarationPath) {
+    static getInstance(elementsDeclarationPath) {
         if (this._instance === null)
-            this._instance = new this(elementsToBuild, elementsDeclarationPath);
+            this._instance = new this(elementsDeclarationPath);
 
         return this._instance;
     }
 
-    build() {
-        this._checkData(this.elementsToBuild);
+    build(elementsToBuild) {
+        this._checkData(elementsToBuild);
+
+        this.elementsToBuild = elementsToBuild;
 
         return this.elementsToBuild.map(etb => this._buildElement(etb));
     }
@@ -34,7 +33,11 @@ export class TemplateBuilder {
         const RenderedElement = require('../' + this._elementsDeclaration.find(ed => ed.type === elementToBuild.type)
             ?.path ?? throw new Error('Element ' + elementToBuild.name + ' does not have type attribute')).default
 
-        const props = {};
+        const props = {
+            classes: [],
+            id: [],
+            children: []
+        };
 
         if (elementToBuild.classes !== undefined){
             props.classes = elementToBuild.classes;
@@ -43,17 +46,12 @@ export class TemplateBuilder {
         if (elementToBuild.id !== undefined)
             props.id = elementToBuild.id;
 
-        console.log(RenderedElement);
-
         if (elementToBuild.children !== undefined && Array.isArray(elementToBuild.children)) {
-
-            const children = []
-
             elementToBuild.children.forEach(ctb => {
-                children.push(this._buildElement(ctb))
+                props.children.push(this._buildElement(ctb))
             })
 
-            return <RenderedElement {...props} children={children} />;
+            return <RenderedElement {...props} />;
         }
 
         return <RenderedElement {...props} />;
