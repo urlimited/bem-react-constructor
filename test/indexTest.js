@@ -1,2 +1,4 @@
 // Require extract script tests
-require("./extractScript/extractScript");
+//TODO: uncomment line 3
+//require("./extractScript/extractScript");
+require("./templateBuilder/buildTemplate");

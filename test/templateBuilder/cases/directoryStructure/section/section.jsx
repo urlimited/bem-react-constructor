@@ -1,7 +1,6 @@
 import React from "react";
 
-const Section = () => {
-
+export const Section = ({classes}) => {
     return <>
         <p>okay</p>
     </>

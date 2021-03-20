@@ -1,0 +1,10 @@
+[
+  {
+    "type": "link",
+    "path": "./test/extractScript/cases/directoryStructure/link/link.jsx"
+  },
+  {
+    "type": "section",
+    "path": "./test/extractScript/cases/directoryStructure/section/section.jsx"
+  }
+]

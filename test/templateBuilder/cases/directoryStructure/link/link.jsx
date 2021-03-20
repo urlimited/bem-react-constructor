@@ -1,10 +1,9 @@
 import React from "react";
 
-const Section = () => {
-
+export const Link = () => {
     return <>
         <p>okay</p>
     </>
 }
 
-export default Section;
+export default Link;
