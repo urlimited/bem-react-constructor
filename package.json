@@ -1,9 +1,10 @@
 {
   "name": "bem-react-constructor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Constructor for BEM in terms of Reactjs",
   "main": "index.js",
   "scripts": {
+    "extract": "node ./src/extractScript.js",
     "test": "mocha"
   },
   "repository": {
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/urlimited/bem-react-constructor/issues"
   },
-  "homepage": "https://github.com/urlimited/bem-react-constructor#readme"
+  "homepage": "https://github.com/urlimited/bem-react-constructor#readme",
+  "dependencies": {
+    "mocha": "^8.3.2"
+  }
 }
