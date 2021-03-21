@@ -1,0 +1,10 @@
+[
+  {
+    "type": "link",
+    "path": "./link/link.jsx"
+  },
+  {
+    "type": "section",
+    "path": "./section/section.jsx"
+  }
+]

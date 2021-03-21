@@ -8,7 +8,8 @@ const fs = require('fs');
 const execSync = require('child_process').execSync;
 const output = execSync('npm run extract --path=./test/templateBuilder/cases/directoryStructure', {encoding: 'utf-8'});
 
-const elementsDeclaration = JSON.parse(fs.readFileSync('./test/templateBuilder/cases/directoryStructure/elementsDeclaration.json', {encoding: 'utf-8'}));
+const elementsDeclarationFile = JSON.parse(fs.readFileSync('./test/templateBuilder/cases/directoryStructure/elementsDeclaration.json', {encoding: 'utf-8'}));
+const dynamicRequireFile = require('./cases/directoryStructure/dynamicRequire.js');
 
 const toCheck = [
     require('./cases/elementWithChildren.ucase'),
@@ -23,7 +24,7 @@ describe('Template builder', () => {
     toCheck.forEach(tc => {
         it(tc.description, () => {
             return assert.strictEqual(
-                ReactDOMServer.renderToString(TemplateBuilder.getInstance(elementsDeclaration).build(tc.useCase)),
+                ReactDOMServer.renderToString(TemplateBuilder.getInstance({elementsDeclarationFile, dynamicRequireFile}).build(tc.useCase)),
                 tc.check
             );
         });

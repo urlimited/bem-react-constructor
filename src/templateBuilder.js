@@ -8,10 +8,12 @@ export class TemplateBuilder {
 
     elementsToBuild = [];
 
-    _elementsDeclaration = {}
+    _elementsDeclaration = {};
+    _dynamicRequire = null;
 
-    constructor(elementsDeclarationPath) {
-        this._elementsDeclaration = elementsDeclarationPath;
+    constructor({elementsDeclarationFile, dynamicRequireFile}) {
+        this._elementsDeclaration = elementsDeclarationFile;
+        this._dynamicRequire = dynamicRequireFile;
     }
 
     static getInstance(elementsDeclarationPath) {
@@ -30,8 +32,10 @@ export class TemplateBuilder {
     }
 
     _buildElement(elementToBuild, result = "") {
-        const RenderedElement = require('../' + this._elementsDeclaration.find(ed => ed.type === elementToBuild.type)
-            ?.path ?? throw new Error('Element ' + elementToBuild.name + ' does not have type attribute')).default
+        /*const tmpPath = this._elementsDeclaration.find(ed => ed.type === elementToBuild.type)
+            ?.path ?? throw new Error('Element ' + elementToBuild.name + ' does not have type attribute')*/
+
+        const RenderedElement = this._dynamicRequire(elementToBuild.type).default
 
         const props = {
             classes: [],

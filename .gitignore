@@ -2,3 +2,7 @@
 node_modules
 /package-lock.json
 /test/extractScript/cases/elementsDeclaration.json
+/test/extractScript/cases/directoryStructure/dynamicRequire.js
+/test/extractScript/cases/directoryStructure/elementsDeclaration.json
+/test/templateBuilder/cases/directoryStructure/dynamicRequire.js
+/test/templateBuilder/cases/directoryStructure/elementsDeclaration.json

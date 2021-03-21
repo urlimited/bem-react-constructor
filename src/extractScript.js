@@ -19,7 +19,7 @@ const buildFileStructure = (curDir, result = [], parentDir = '', config = {block
             if (d.substr(d.length - config.blockExt.length) === config.blockExt && _isBlockHasCorrectFilename(parentDir, d, config.blockExt))
                 result.push({
                     type: parentDir,
-                    path: "./" + path.relative(basePath, path.resolve(dPath))
+                    path: "./" + parentDir + "/" + d
                 });
         }
     });
@@ -36,6 +36,30 @@ const _isDirHasBlockFile = (dirPath, dirName, ext) => {
 }
 
 try {
+    const structure = buildFileStructure(process.env.npm_config_path);
+
+    let jsContent = "////////////////////////////////////////\n"
+        jsContent += "// ATTENTION ! \n"
+        jsContent += "// THIS FILE IS GENERATED DYNAMICALLY \n"
+        jsContent += "// DO NOT TOUCH IT \n"
+        jsContent += "////////////////////////////////////////\n\n"
+
+        jsContent += "module.exports = (name) => {\n" +
+        "\tswitch(name){\n"
+
+    structure.forEach(d => {
+        jsContent += `\t\tcase '${d.type}':\n`;
+        jsContent += `\t\t\treturn require('${d.path}');\n`;
+    })
+
+    jsContent += "\t}\n" +
+        "}";
+
+    /*if(!fs.existsSync(process.env.npm_config_path + '/../configs/'))
+        fs.mkdirSync(process.env.npm_config_path + '/../configs/');*/
+
+    fs.writeFileSync(process.env.npm_config_path + '/dynamicRequire.js', jsContent);
+
     fs.writeFileSync(process.env.npm_config_path + '/elementsDeclaration.json', JSON.stringify(buildFileStructure(process.env.npm_config_path)));
     console.log('\x1b[32m%s\x1b[0m', "Created file in " + fs.realpathSync(process.env.npm_config_path + '/elementsDeclaration.json'));
 } catch (e) {
