@@ -16,9 +16,9 @@ export class TemplateBuilder {
         this._dynamicRequire = dynamicRequireFile;
     }
 
-    static getInstance(elementsDeclarationPath) {
+    static getInstance({elementsDeclarationFile, dynamicRequireFile}) {
         if (this._instance === null)
-            this._instance = new this(elementsDeclarationPath);
+            this._instance = new this({elementsDeclarationFile, dynamicRequireFile});
 
         return this._instance;
     }
@@ -28,7 +28,11 @@ export class TemplateBuilder {
 
         this.elementsToBuild = elementsToBuild;
 
-        return this.elementsToBuild.map(etb => this._buildElement(etb));
+        //TODO: this is issue, since key is not best param to use as a unique key
+        return this.elementsToBuild.map((etb, key) => {
+            etb.key = key;
+            return this._buildElement(etb)
+        });
     }
 
     _buildElement(elementToBuild, result = "") {
@@ -41,11 +45,14 @@ export class TemplateBuilder {
             classes: [],
             id: [],
             children: [],
-            ...Object.keys(elementToBuild)
-                .filter(k => ![
-                    'type'
-                ].includes(k))
         };
+
+        Object.keys(elementToBuild)
+            .filter(k => ![
+                'type',
+                'children'
+            ].includes(k))
+            .forEach(k => props[k] = elementToBuild[k])
 
         if (elementToBuild.classes !== undefined){
             props.classes = elementToBuild.classes;
