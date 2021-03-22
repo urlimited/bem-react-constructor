@@ -36,7 +36,9 @@ const _isDirHasBlockFile = (dirPath, dirName, ext) => {
 }
 
 try {
-    const structure = buildFileStructure(process.env.npm_config_path);
+    console.log(process.argv[2]);
+
+    const structure = buildFileStructure(process.argv[2]);
 
     let jsContent = "////////////////////////////////////////\n"
         jsContent += "// ATTENTION ! \n"
@@ -55,13 +57,13 @@ try {
     jsContent += "\t}\n" +
         "}";
 
-    /*if(!fs.existsSync(process.env.npm_config_path + '/../configs/'))
-        fs.mkdirSync(process.env.npm_config_path + '/../configs/');*/
+    /*if(!fs.existsSync(process.argv[2] + '/../configs/'))
+        fs.mkdirSync(process.argv[2] + '/../configs/');*/
 
-    fs.writeFileSync(process.env.npm_config_path + '/dynamicRequire.js', jsContent);
+    fs.writeFileSync(process.argv[2] + '/dynamicRequire.js', jsContent);
 
-    fs.writeFileSync(process.env.npm_config_path + '/elementsDeclaration.json', JSON.stringify(buildFileStructure(process.env.npm_config_path)));
-    console.log('\x1b[32m%s\x1b[0m', "Created file in " + fs.realpathSync(process.env.npm_config_path + '/elementsDeclaration.json'));
+    fs.writeFileSync(process.argv[2] + '/elementsDeclaration.json', JSON.stringify(buildFileStructure(process.argv[2])));
+    console.log('\x1b[32m%s\x1b[0m', "Created file in " + fs.realpathSync(process.argv[2] + '/elementsDeclaration.json'));
 } catch (e) {
     console.log('\x1b[31m%s\x1b[0m', e.message);
 }

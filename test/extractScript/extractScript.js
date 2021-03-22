@@ -2,7 +2,7 @@ const assert = require('assert');
 const fs = require('fs');
 
 const execSync = require('child_process').execSync;
-const output = execSync('npm run extract --path=./test/extractScript/cases/directoryStructure', {encoding: 'utf-8'});
+const output = execSync('npm run extract ./test/extractScript/cases/directoryStructure', {encoding: 'utf-8'});
 
 describe('Extract script', () => {
     it('returns required file structure', () => {

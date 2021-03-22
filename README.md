@@ -31,15 +31,15 @@ Within the instructions below we use the following file structure:
            }
        }
     ```
-2. Run into your terminal within project root directory `npm run extract --path=src/application/templates`
+2. Run into your terminal within project root directory `npm run extract ./src/application/templates`
  (according to the folder structure above)
     > Note: everytime you add a new block, or change existing name of the block, 
-    you need to re-run `npm run extract --path=src/application/templates` script
+    you need to re-run `npm run extract ./src/application/templates` script
 
 3. Please, check files `dynamicRequire.js` and 
 `elementsDeclaration.json` are available in `src/application/templates` (whatever 
-you used as a `path` parameter in the previous step). If not, please go to the step 2 and double-check your 
-`path` parameter.
+you used as a third parameter in the previous step). If not, please go to the step 2 and double-check your 
+third parameter.
 
 4. Now you are able to use the code by the following way:
     
