@@ -43,7 +43,7 @@ export class TemplateBuilder {
 
         const props = {
             classes: [],
-            id: [],
+            id: "",
             children: [],
         };
 
