@@ -32,6 +32,9 @@ const _isBlockHasCorrectFilename = (dirName, fileName, ext) => {
 }
 
 const _isDirHasBlockFile = (dirPath, dirName, ext) => {
+    if(dirName[0] === "_")
+        return true;
+
     return fs.readdirSync(dirPath).includes(dirName + ext);
 }
 
