@@ -47,7 +47,7 @@ third parameter.
     // homepage.jsx (according to the file structure above)
     
     import React from "react";
-    import TemplateBuilder from "templateBuilder/src/templateBuilder.js";
+    import TemplateBuilder from "bem-react-constructor/src/templateBuilder.js";
     
     
     export const Homepage = () => {
@@ -137,7 +137,7 @@ third parameter.
 | children | nested elements, which you should nest by yourself | false |
 
 #### Disclaimer:
-This library does not have any relation with yandex/bem-react. I use it for myself, 
-but I can see that people search it and download it. I lead the development on it in solo
-if you would like to take participation, please contact me via the email "maxim.tsoy.cv@gmail.com".
-I will try to do my best in terms of documenting this library. Please check updates on a week base 
+This library does not have any relation with Yandex/bem-react. I use it for myself, 
+but I can see that people search for it and download it. I lead the development on it solo
+if you would like to take participate, please contact me via the email "maxim.tsoy.cv@gmail.com".
+I will try to do my best in terms of documenting this library. Please check updates on a weekly base 

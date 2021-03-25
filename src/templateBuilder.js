@@ -45,6 +45,7 @@ export class TemplateBuilder {
             classes: [],
             id: "",
             children: [],
+            reduceClasses: true
         };
 
         Object.keys(elementToBuild)
@@ -54,12 +55,16 @@ export class TemplateBuilder {
             ].includes(k))
             .forEach(k => props[k] = elementToBuild[k])
 
-        if (elementToBuild.classes !== undefined){
+        if (elementToBuild.classes !== undefined)
             props.classes = elementToBuild.classes;
-        }
+
 
         if (elementToBuild.id !== undefined)
             props.id = elementToBuild.id;
+
+        // Reduce proposed classes into a string
+        if(props.reduceClasses)
+            props.classes = props.classes.reduce((accum, next) => accum + ", " + next, "").trim();
 
         if (elementToBuild.children !== undefined && Array.isArray(elementToBuild.children)) {
             elementToBuild.children.forEach(ctb => {
