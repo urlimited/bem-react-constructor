@@ -64,7 +64,7 @@ export class TemplateBuilder {
 
         // Reduce proposed classes into a string
         if(props.reduceClasses)
-            props.classes = props.classes.reduce((accum, next) => accum + ", " + next, "").trim();
+            props.classes = props.classes.reduce((accum, next) => accum + " " + next, "").trim();
 
         if (elementToBuild.children !== undefined && Array.isArray(elementToBuild.children)) {
             elementToBuild.children.forEach(ctb => {
